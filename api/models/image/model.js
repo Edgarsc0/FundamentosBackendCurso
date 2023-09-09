@@ -11,13 +11,15 @@ class Image {
         return base64.map(item=>item.currentString)
     }
 
-    async 
+    async getImages(){
+        return await imageSchema.find();
+    }
 
     async updateRegister(requestData) {
         try {
             const { id, partialString, requestNumber, totalRequest, autor } = requestData;
 
-            const image = await new imageSchema({
+            await new imageSchema({
                 idOwner: id,
                 currentString: partialString,
                 autor: autor
