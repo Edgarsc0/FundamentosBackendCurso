@@ -1,13 +1,10 @@
 const mongoose=require("mongoose");
 
 const userModel = new mongoose.Schema({
-    /*username: String,
+    username: String,
     email: String,
     imageURL: String,
-    description: String*/
-    student:String,
-    age:Number,
-    school:String
+    description: String
 });
 
-module.exports=mongoose.model("tabla2",userModel);
+module.exports=mongoose.model("User",userModel);
