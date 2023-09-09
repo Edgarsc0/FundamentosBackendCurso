@@ -8,11 +8,13 @@ class Image {
 
     async getBase64(id) {
         const base64 = await imageSchema.find({ idOwner: id });
-        return base64.map(item=>item.currentString)
+        return {
+            base64
+        }
     }
 
-    async getImages(){
-        return await imageSchema.find();
+    async getImages() {
+        return await imageSchema.find({}, { idOwner: 1, autor: 1, _id: 0 });
     }
 
     async updateRegister(requestData) {

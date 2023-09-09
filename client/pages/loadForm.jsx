@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
+import { signIn, useSession } from "next-auth/react"
 
 const ImageForm = () => {
     const [imageData, setImageData] = useState(null);
     const [sizeImage, setSizeImage] = useState(null);
     const [autor, setAutor] = useState(null);
+    //const { data: session, status } = useSession();
+
+    /*useEffect(() => {
+        console.log(session);
+    }, [session]);*/
 
     useEffect(() => {
         setSizeImage(getStringSizeInMB(imageData))
@@ -41,7 +47,6 @@ const ImageForm = () => {
             console.log(imageData.split(",")[1].length);
             console.log(partialStrings);
             partialStrings.map(async (item, index) => {
-                console.log(item);
                 const { data } = await axios.post("http://localhost:8080/api/v0/instaClone/image", {
                     id: CryptoJS.SHA1(imageData).toString(CryptoJS.enc.Hex),
                     partialString: item,
@@ -90,6 +95,7 @@ const ImageForm = () => {
             <h2>Adjuntar imagen</h2>
             <input type="file" onChange={handleImageChange} />
             <br></br>
+            
             <input type='text' onChange={handleAutorChange}></input>
             {imageData && sizeImage && (
                 <div>
